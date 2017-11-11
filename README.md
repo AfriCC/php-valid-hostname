@@ -1,4 +1,10 @@
 [![Build Status](https://travis-ci.org/AfriCC/php-valid-hostname.svg?branch=master)](https://travis-ci.org/AfriCC/php-valid-hostname)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AfriCC/php-valid-hostname/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/AfriCC/php-valid-hostname/?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/AfriCC/php-valid-hostname/badge.svg?branch=master)](https://coveralls.io/github/AfriCC/php-valid-hostname?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/africc/valid-hostname/v/stable.svg)](https://packagist.org/packages/africc/valid-hostname)
+[![Packagist](https://img.shields.io/packagist/dt/africc/valid-hostname.svg)](https://packagist.org/packages/africc/valid-hostname)
+[![Latest Unstable Version](https://poser.pugx.org/africc/valid-hostname/v/unstable.svg)](https://packagist.org/packages/africc/valid-hostname)
+[![License](https://poser.pugx.org/africc/valid-hostname/license.svg)](https://packagist.org/packages/africc/valid-hostname)
 
 # africc/valid-hostname
 

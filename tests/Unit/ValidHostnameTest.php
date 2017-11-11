@@ -28,4 +28,46 @@ class ValidHostnameTest extends TestCase
         $this->assertFalse(AfriCC\Valid\hostname('w*w.curlmyip.net', true, false, true));
         $this->assertTrue(AfriCC\Valid\hostname('curlmyip.net', true, false, true));
     }
+
+    public function testErrorInvalid()
+    {
+        $this->assertFalse(AfriCC\Valid\hostname('', true, false, false, $errno));
+        $this->assertEquals(VALID_HOSTNAME_ERROR_INVALID, $errno);
+    }
+
+    public function testErrorEmptyLabel()
+    {
+        $this->assertFalse(AfriCC\Valid\hostname('.curlmyip.net', true, false, false, $errno));
+        $this->assertEquals(VALID_HOSTNAME_ERROR_INVALID, $errno);
+    }
+
+    public function testErrorLabelTooLong()
+    {
+        $this->assertFalse(AfriCC\Valid\hostname(str_repeat('1', 64) . '.curlmyip.net', true, false, false, $errno));
+        $this->assertEquals(VALID_HOSTNAME_ERROR_INVALID, $errno);
+    }
+
+    public function testErrorDomainTooLong()
+    {
+        $this->assertFalse(AfriCC\Valid\hostname(str_repeat('1', 255) . '.net', true, false, false, $errno));
+        $this->assertEquals(VALID_HOSTNAME_ERROR_INVALID, $errno);
+    }
+
+    public function testErrorLabelLeadingHyphen()
+    {
+        $this->assertFalse(AfriCC\Valid\hostname('-curlmyip.net', true, false, false, $errno));
+        $this->assertEquals(VALID_HOSTNAME_ERROR_LEADING_HYPHEN, $errno);
+    }
+
+    public function testErrorLabelTrailingHyphen()
+    {
+        $this->assertFalse(AfriCC\Valid\hostname('curlmyip.net-', true, false, false, $errno));
+        $this->assertEquals(VALID_HOSTNAME_ERROR_TRAILING_HYPHEN, $errno);
+    }
+
+    public function testErrorLabelDisallowed()
+    {
+        $this->assertFalse(AfriCC\Valid\hostname('curlmyip%.net', true, false, false, $errno));
+        $this->assertEquals(VALID_HOSTNAME_ERROR_DISALLOWED, $errno);
+    }
 }

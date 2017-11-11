@@ -14,9 +14,6 @@ namespace AfriCC\Valid;
 if (!defined('VALID_HOSTNAME_OK')) {
     define('VALID_HOSTNAME_OK', 2);
     define('VALID_HOSTNAME_ERROR_INVALID', 3);
-    define('VALID_HOSTNAME_ERROR_EMPTY_LABEL', 4);
-    define('VALID_HOSTNAME_ERROR_LABEL_TOO_LONG', 5);
-    define('VALID_HOSTNAME_ERROR_DOMAIN_NAME_TOO_LONG', 6);
     define('VALID_HOSTNAME_ERROR_LEADING_HYPHEN', 7);
     define('VALID_HOSTNAME_ERROR_TRAILING_HYPHEN', 8);
     define('VALID_HOSTNAME_ERROR_DISALLOWED', 9);
@@ -29,18 +26,15 @@ function hostname($string, $public = true, $dns = false, $allow_glob = false, &$
     $string = mb_strtolower($string, 'UTF-8');
 
     $hostname_ascii = idn_to_ascii($string, 0, INTL_IDNA_VARIANT_2003);
-    $hostname_utf8  = idn_to_utf8 ($string, 0, INTL_IDNA_VARIANT_2003);
+    $hostname_utf8  = idn_to_utf8($string, 0, INTL_IDNA_VARIANT_2003);
 
     // lets verify it converted correctly
-    // (sometimes idn_to_ascii returns empty string if the input is invalid)
+    // this will also verify:
+    // * label length
+    // * empty labels
+    // * domain length
     if ($hostname_ascii === false || $hostname_ascii !== idn_to_ascii($hostname_utf8, 0, INTL_IDNA_VARIANT_2003) || $hostname_ascii === '') {
         $errno = VALID_HOSTNAME_ERROR_INVALID;
-        return false;
-    }
-
-    // overall length check
-    if (strlen($hostname_ascii) > 253) {
-        $errno = VALID_HOSTNAME_ERROR_DOMAIN_NAME_TOO_LONG;
         return false;
     }
 
@@ -48,26 +42,10 @@ function hostname($string, $public = true, $dns = false, $allow_glob = false, &$
     $labels_utf8  = explode('.', $hostname_utf8);
 
     foreach ($labels_ascii as $n => $label) {
-        if (mb_strlen($label, 'ASCII') > 63) {
-            $errno = VALID_HOSTNAME_ERROR_LABEL_TOO_LONG;
-            return false;
-        }
-
-        if (mb_strlen($label, 'ASCII') < 1) {
-            $errno = VALID_HOSTNAME_ERROR_EMPTY_LABEL;
-            return false;
-        }
 
         // optionally allow globs
         if ($allow_glob && $label === '*') {
             continue;
-        }
-
-        // label must only contain 0-9, a-z or -_
-        // hotfix: temporarily allow underscore, ideally only subdomains are allowed to have underscores
-        if (!preg_match('/^([a-z0-9_](-*[a-z0-9_])*)$/', $label)) {
-            $errno = VALID_HOSTNAME_ERROR_DISALLOWED;
-            return false;
         }
 
         // label is not allowed to start or end with hyphen
@@ -81,7 +59,12 @@ function hostname($string, $public = true, $dns = false, $allow_glob = false, &$
             return false;
         }
 
-
+        // label must only contain 0-9, a-z or -_
+        // hotfix: temporarily allow underscore, ideally only subdomains are allowed to have underscores
+        if (!preg_match('/^([a-z0-9_](-*[a-z0-9_])*)$/', $label)) {
+            $errno = VALID_HOSTNAME_ERROR_DISALLOWED;
+            return false;
+        }
     }
 
     // check if domain is in the public domain
