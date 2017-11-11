@@ -1,0 +1,24 @@
+{
+    "name": "africc/valid-hostname",
+    "description": "A simple (but real) hostname validator",
+    "keywords": ["validator", "hostname", "domains", "tld"],
+    "homepage": "https://github.com/AfriCC/php-valid-hostname",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "9JKH",
+            "email": "hello@9jkh.co.za",
+            "homepage": "https://9jkh.co.za"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "ext-intl": "*"
+    },
+    "require-dev": {
+        "satooshi/php-coveralls": "^1.0"
+    },
+    "autoload": {
+        "files": ["src/valid-hostname.php"]
+    }
+}
