@@ -7,7 +7,8 @@ class ValidHostnameTest extends TestCase
     public function testPublicDomain()
     {
         $this->assertTrue(AfriCC\Valid\hostname('curlmyip.net', true));
-        $this->assertFalse(AfriCC\Valid\hostname('curlmyip.localdomain', true));
+        $this->assertFalse(AfriCC\Valid\hostname('curlmyip.localdomain', true, false, false, $errno));
+        $this->assertEquals(VALID_HOSTNAME_ERROR_NOTPUBLIC, $errno);
     }
 
     public function testPrivateDomain()
@@ -19,7 +20,8 @@ class ValidHostnameTest extends TestCase
     public function testRealDomain()
     {
         $this->assertTrue(AfriCC\Valid\hostname('curlmyip.net', true, true));
-        $this->assertFalse(AfriCC\Valid\hostname('test.localdomain', true, true));
+        $this->assertFalse(AfriCC\Valid\hostname('thisdomainshouldnotexistever1r1341.ad', true, true, false, $errno));
+        $this->assertEquals(VALID_HOSTNAME_ERROR_NODNS, $errno);
     }
 
     public function testGlobDomain()
