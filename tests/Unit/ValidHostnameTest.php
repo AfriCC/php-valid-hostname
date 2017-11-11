@@ -9,6 +9,8 @@ class ValidHostnameTest extends TestCase
         $this->assertTrue(AfriCC\Valid\hostname('curlmyip.net', true));
         $this->assertFalse(AfriCC\Valid\hostname('curlmyip.localdomain', true, false, false, $errno));
         $this->assertEquals(VALID_HOSTNAME_ERROR_NOTPUBLIC, $errno);
+        $this->assertFalse(AfriCC\Valid\hostname('curlmyip', true, false, false, $errno));
+        $this->assertEquals(VALID_HOSTNAME_ERROR_NOTPUBLIC, $errno);
     }
 
     public function testPrivateDomain()
