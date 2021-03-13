@@ -26,7 +26,7 @@ function hostname($string, $public = true, $dns = false, $allow_glob = false, &$
     $string = mb_strtolower($string, 'UTF-8');
 
     $hostname_ascii = idn_to_ascii($string, IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46);
-    $hostname_utf8  = idn_to_utf8($string);
+    $hostname_utf8  = idn_to_utf8($string, 0, INTL_IDNA_VARIANT_UTS46);
 
     // lets verify it converted correctly
     // this will also verify:
