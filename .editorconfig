@@ -10,5 +10,5 @@ indent_style = space
 indent_size = 4
 indent_style = tab
 
-[*.php]
+[*.{php,json}]
 indent_size = 4

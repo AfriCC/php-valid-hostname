@@ -49,7 +49,7 @@ function hostname($string, $public = true, $dns = false, $allow_glob = false, &$
         }
 
         // label is not allowed to start or end with hyphen
-        if ($labels_utf8[$n]{0} === '-') {
+        if ($labels_utf8[$n][0] === '-') {
             $errno = VALID_HOSTNAME_ERROR_LEADING_HYPHEN;
             return false;
         }

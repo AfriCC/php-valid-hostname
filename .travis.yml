@@ -9,4 +9,5 @@ matrix:
 
 sudo: false
 
-script: ./build.sh
+install: make build
+script: make test

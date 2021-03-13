@@ -16,7 +16,8 @@
         "ext-intl": "*"
     },
     "require-dev": {
-        "satooshi/php-coveralls": "^1.0"
+        "phpunit/phpunit": "^9.5",
+        "php-coveralls/php-coveralls": "^2.4"
     },
     "autoload": {
         "files": ["src/valid-hostname.php"]
