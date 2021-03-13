@@ -57,18 +57,6 @@ class ValidHostnameTest extends TestCase
         $this->assertEquals(VALID_HOSTNAME_ERROR_INVALID, $errno);
     }
 
-    public function testErrorLabelLeadingHyphen()
-    {
-        $this->assertFalse(AfriCC\Valid\hostname('-curlmyip.net', true, false, false, $errno));
-        $this->assertEquals(VALID_HOSTNAME_ERROR_LEADING_HYPHEN, $errno);
-    }
-
-    public function testErrorLabelTrailingHyphen()
-    {
-        $this->assertFalse(AfriCC\Valid\hostname('curlmyip.net-', true, false, false, $errno));
-        $this->assertEquals(VALID_HOSTNAME_ERROR_TRAILING_HYPHEN, $errno);
-    }
-
     public function testErrorLabelDisallowed()
     {
         $this->assertFalse(AfriCC\Valid\hostname('curlmyip%.net', true, false, false, $errno));
