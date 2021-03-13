@@ -25,15 +25,15 @@ function hostname($string, $public = true, $dns = false, $allow_glob = false, &$
 {
     $string = mb_strtolower($string, 'UTF-8');
 
-    $hostname_ascii = idn_to_ascii($string, 0, INTL_IDNA_VARIANT_2003);
-    $hostname_utf8  = idn_to_utf8($string, 0, INTL_IDNA_VARIANT_2003);
+    $hostname_ascii = idn_to_ascii($string,);
+    $hostname_utf8  = idn_to_utf8($string);
 
     // lets verify it converted correctly
     // this will also verify:
     // * label length
     // * empty labels
     // * domain length
-    if ($hostname_ascii === false || $hostname_ascii !== idn_to_ascii($hostname_utf8, 0, INTL_IDNA_VARIANT_2003) || $hostname_ascii === '') {
+    if ($hostname_ascii === false || $hostname_ascii !== idn_to_ascii($hostname_utf8) || $hostname_ascii === '') {
         $errno = VALID_HOSTNAME_ERROR_INVALID;
         return false;
     }
