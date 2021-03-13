@@ -13,7 +13,7 @@ test:
 ifeq ($(RUN_COVERAGE),true)
 	mkdir -p build/logs
 	vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
-	vendor/bin/coveralls --quiet
+	vendor/bin/php-coveralls
 else
 	vendor/bin/phpunit
 endif
