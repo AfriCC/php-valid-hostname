@@ -1,6 +1,6 @@
 # africc/valid-hostname
 
-[![Build Status](https://travis-ci.com/AfriCC/php-valid-hostname.svg?branch=main)](https://travis-ci.org/AfriCC/php-valid-hostname)
+[![Build Status](https://travis-ci.com/AfriCC/php-valid-hostname.svg?branch=main)](https://travis-ci.com/AfriCC/php-valid-hostname)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AfriCC/php-valid-hostname/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/AfriCC/php-valid-hostname/?branch=main)
 [![Coverage Status](https://coveralls.io/repos/github/AfriCC/php-valid-hostname/badge.svg?branch=main)](https://coveralls.io/github/AfriCC/php-valid-hostname?branch=main)
 [![Latest Stable Version](https://poser.pugx.org/africc/valid-hostname/v/stable.svg)](https://packagist.org/packages/africc/valid-hostname)
