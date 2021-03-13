@@ -48,17 +48,6 @@ function hostname($string, $public = true, $dns = false, $allow_glob = false, &$
             continue;
         }
 
-        // label is not allowed to start or end with hyphen
-        if ($labels_utf8[$n][0] === '-') {
-            $errno = VALID_HOSTNAME_ERROR_LEADING_HYPHEN;
-            return false;
-        }
-
-        if (mb_substr($labels_utf8[$n], -1, 1, 'UTF-8') === '-') {
-            $errno = VALID_HOSTNAME_ERROR_TRAILING_HYPHEN;
-            return false;
-        }
-
         // label must only contain 0-9, a-z or -_
         // hotfix: temporarily allow underscore, ideally only subdomains are allowed to have underscores
         if (!preg_match('/^([a-z0-9_](-*[a-z0-9_])*)$/', $label)) {
